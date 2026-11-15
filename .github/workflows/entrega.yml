@@ -1,0 +1,31 @@
+name: Entrega continua - Sistema de Ventas
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validar-y-entregar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ejecutar pruebas
+        run: node --test
+
+      - name: Preparar entrega
+        run: |
+          mkdir -p entrega
+          cp ventas.js entrega/
+
+      - name: Guardar artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: sistema-ventas
+          path: entrega/
