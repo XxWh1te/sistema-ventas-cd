@@ -1,6 +1,4 @@
-function calcularTotal(precio, cantidad) {
-    // Forzamos un error manual para que falle la ejecución del script
-    throw new Error("Error forzado en producción");
-}
-
-module.exports = { calcularTotal };
+test('venta normal', () => {
+    // Forzamos un fallo comparando 100 con un número incorrecto (ej. 999)
+    assert.strictEqual(calcularTotal(50, 2), 999);
+});
